@@ -6,7 +6,10 @@
  * Time: 12:28 PM
  */
 // Obtener valores introducidos
+
 include 'SpreadsheetReader.php';
+header('Content-Type: text/plain');
+require('php-excel-reader/excel_reader2.php');
 
 $nombreDirectorio = "xls/";
 
@@ -42,47 +45,48 @@ try
 /**
  * XLS parsing uses php-excel-reader from http://code.google.com/p/php-excel-reader/
  */
-	header('Content-Type: text/plain');
+
 
 	// Excel reader from http://code.google.com/p/php-excel-reader/
-	require('php-excel-reader/excel_reader2.php');
-	require('SpreadsheetReader.php');
+
+	//require('SpreadsheetReader.php');
 
     // If you need to parse XLS files, include php-excel-reader
-    $Reader = new SpreadsheetReader('personas.xlsx');
+    //$Reader = new SpreadsheetReader('personas.xlsx');
+/*
     $i = 0;
     $j = 0;
     $sql = '';
-    foreach ($Reader as $Row)
+    foreach ($Spreadsheet as $Row)
     {
-        echo $row;
-//        //adds the sql for creating the table
-//        if($j = 0){
-//            $sql += 'CREATE TABLE ';
-//            $sql += $Row[0];
-//            $sql += ' ';
-//        }
-//        //adds the sql for creating each of the columns
-//        else if($j = 1){
-//            foreach ($Row as $cName){
-//                //exploding the column name and type into an array
-//                $cNameArray = explode(',', $cName);
-//                //adding the column name
-//                $sql += '(';
-//                $sql += $cNameArray[0];
-//                $sql += ' ';
-//                //adding the column type
-//                $sql += $cNameArray[1];
-//                //adding the size restraint
-//                $sql += '(';
-//                $sql += $cNameArray[2];
-//                $sql += '), ';
-//            }
-//        }
-//        $j += 1;
-//        echo $sql;
+       // echo $ow;
+        //adds the sql for creating the table
+        if($j = 0){
+            $sql += 'CREATE TABLE ';
+            $sql += $Row[0];
+            $sql += ' ';
+        }
+        //adds the sql for creating each of the columns
+        else if($j = 1){
+            foreach ($Row as $cName){
+                //exploding the column name and type into an array
+                $cNameArray = explode(',', $cName);
+                //adding the column name
+                $sql += '(';
+                $sql += $cNameArray[0];
+                $sql += ' ';
+                //adding the column type
+                $sql += $cNameArray[1];
+                //adding the size restraint
+                $sql += '(';
+                $sql += $cNameArray[2];
+                $sql += '), ';
+            }
+        }
+        $j += 1;
+        echo $sql;
     }
-
+*/
 
 /*
 

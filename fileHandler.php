@@ -63,7 +63,7 @@ print_r($stack);
         foreach ($Spreadsheet as $Key => $Row) {
 
             if($count == 0){
-                $string.= "Create Table ".$Row[0]."(";
+                $string.= "CREATE TABLE ".$Row[0]."(";
                 $tableName = $Row[0];
             }
             else if ($count == 1){
@@ -75,7 +75,6 @@ print_r($stack);
                     $string.= $myArray[0]." ";
                     if($myArray[1]=="varchar"){
                         $string.= "varchar(".$myArray[2].")";
-                       // $nombres+="varchar,";
                         array_push($nombres, "varchar");
 
                     }
@@ -95,7 +94,7 @@ print_r($stack);
 
                     }
                     else if($myArray[1]=="decimal"){
-                        $string.= "decimal";
+                        $string.= "decimal(".$myArray[2].",".$myArray[3].")";
                         array_push($nombres, "decimal");
 
                     }
@@ -168,7 +167,7 @@ print_r($stack);
 
         $string = substr($string, 0, -2).";";
         echo $string;
-
+        unlink($Filepath);
     }
 
 /**

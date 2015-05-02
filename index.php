@@ -35,7 +35,7 @@
                 type: 'post',
                 success: function(respuesta){
 
-                    $("div").html( "<p>" + respuesta + "</p>");
+                    $("div").html( "<h3>" + respuesta + "</h3>");
                 }
             });
 

@@ -39,7 +39,52 @@ try
     $Sheets = $Spreadsheet -> Sheets();
 
 
+/**
+ * XLS parsing uses php-excel-reader from http://code.google.com/p/php-excel-reader/
+ */
+	header('Content-Type: text/plain');
 
+	// Excel reader from http://code.google.com/p/php-excel-reader/
+	require('php-excel-reader/excel_reader2.php');
+	require('SpreadsheetReader.php');
+
+    // If you need to parse XLS files, include php-excel-reader
+    $Reader = new SpreadsheetReader('personas.xlsx');
+    $i = 0;
+    $j = 0;
+    $sql = '';
+    foreach ($Reader as $Row)
+    {
+        echo $row;
+//        //adds the sql for creating the table
+//        if($j = 0){
+//            $sql += 'CREATE TABLE ';
+//            $sql += $Row[0];
+//            $sql += ' ';
+//        }
+//        //adds the sql for creating each of the columns
+//        else if($j = 1){
+//            foreach ($Row as $cName){
+//                //exploding the column name and type into an array
+//                $cNameArray = explode(',', $cName);
+//                //adding the column name
+//                $sql += '(';
+//                $sql += $cNameArray[0];
+//                $sql += ' ';
+//                //adding the column type
+//                $sql += $cNameArray[1];
+//                //adding the size restraint
+//                $sql += '(';
+//                $sql += $cNameArray[2];
+//                $sql += '), ';
+//            }
+//        }
+//        $j += 1;
+//        echo $sql;
+    }
+
+
+/*
 
 
     echo '---------------------------------'.PHP_EOL;
@@ -89,7 +134,9 @@ try
         echo '---------------------------------'.PHP_EOL;
         echo '*** End of sheet '.$Name.' ***'.PHP_EOL;
         echo '---------------------------------'.PHP_EOL;
-    }
+
+
+*/
 
 }catch (Exception $E)
 {

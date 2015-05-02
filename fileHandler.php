@@ -44,12 +44,15 @@ try
     $tableName;
     //$nombres = "";
     $nombres = array();
+    $size = sizeof($Sheets);
+
     /*
      *
      * $stack = array("orange", "banana");
 array_push($stack, "apple", "raspberry");
 print_r($stack);
      */
+    $string = "";
 
     foreach ($Sheets as $Index => $Name) {
 
@@ -60,7 +63,7 @@ print_r($stack);
         foreach ($Spreadsheet as $Key => $Row) {
 
             if($count == 0){
-                echo "Create Table ".$Row[0]."(";
+                $string.= "Create Table ".$Row[0]."(";
                 $tableName = $Row[0];
             }
             else if ($count == 1){
@@ -69,29 +72,39 @@ print_r($stack);
 
                 foreach ($Row as $Key => $Row1){
                     $myArray = explode(',', $Row1);
-                    echo $myArray[0]." ";
+                    $string.= $myArray[0]." ";
                     if($myArray[1]=="varchar"){
-                        echo "varchar(".$myArray[2].")";
+                        $string.= "varchar(".$myArray[2].")";
                        // $nombres+="varchar,";
                         array_push($nombres, "varchar");
 
                     }
                     else if($myArray[1]=="int"){
-                        echo "int";
+                        $string.= "int";
                         array_push($nombres, "int");
 
                     }
                     else if($myArray[1]=="char"){
-                        echo "char";
+                        $string.= "char";
                         array_push($nombres, "char");
+
+                    }
+                    else if($myArray[1]=="date"){
+                        $string.= "date";
+                        array_push($nombres, "date");
+
+                    }
+                    else if($myArray[1]=="decimal"){
+                        $string.= "decimal";
+                        array_push($nombres, "decimal");
 
                     }
                     $aux++;
                     if($aux <= sizeof($Row)){
-                        echo", ";
+                        $string.=", ";
                     }
                     else{
-                        echo");<br> INSERT INTO ".$tableName." <br> VALUES ";
+                        $string.=");<br> INSERT INTO ".$tableName." <br> VALUES ";
                     }
                 }
 
@@ -99,41 +112,63 @@ print_r($stack);
             else{
 
                 $i = 0;
-                echo "(";
+                $string.= "(";
                 foreach ($Row as $Key => $Row1) {
 
                         if($nombres[$i]=="varchar"){
                             if(sizeof($nombres)>($i+1))
-                                echo "'$Row1', ";
+                                $string.= "'$Row1', ";
                             else
-                                echo "'$Row1'";
+                                $string.= "'$Row1'";
                         }
 
                         else if($nombres[$i]=="int"){
                             if(sizeof($nombres)>($i+1))
-                                echo "$Row1, ";
+                                $string.= "$Row1, ";
                             else
-                                echo "$Row1";
+                                $string.= "$Row1";
                         }
                         else if($nombres[$i]=="char"){
                             if(sizeof($nombres)>($i+1))
-                                echo "'$Row1', ";
+                                $string.= "'$Row1', ";
                             else
-                                echo "'$Row1'";
+                                $string.= "'$Row1'";
+                        }
+                        else if($nombres[$i]=="date"){
+                            if(sizeof($nombres)>($i+1))
+                                $string.= "'$Row1', ";
+                            else
+                                $string.= "'$Row1'";
+                        }
+                        else if($nombres[$i]=="decimal"){
+                            if(sizeof($nombres)>($i+1))
+                                $string.= "$Row1, ";
+                            else
+                                $string.= "$Row1";
                         }
                     $i++;
                 }
-                if(sizeof($Row)>($count))
-                    echo "), ";
-                else
-                    echo ");";
-
+                $string.= "), ";
+                /*
+                if($size>($count)) {
+                    $string+= "), ";
+                    $string+= " " . $count . " " . $size . " ";
+                }
+                else {
+                    $string+= ");";
+                    $string+=   " " . $count . " " . $size . " ";
+                }
+                */
 
             }
             $count++;
             //echo implode("|", $Row);
 
         }
+
+        $string = substr($string, 0, -2).";";
+        echo $string;
+
     }
 
 /**

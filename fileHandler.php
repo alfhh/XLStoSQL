@@ -41,6 +41,100 @@ try
 
     $Sheets = $Spreadsheet -> Sheets();
 
+    $tableName;
+    //$nombres = "";
+    $nombres = array();
+    /*
+     *
+     * $stack = array("orange", "banana");
+array_push($stack, "apple", "raspberry");
+print_r($stack);
+     */
+
+    foreach ($Sheets as $Index => $Name) {
+
+        $Spreadsheet -> ChangeSheet($Index);
+        $count = 0;
+        $aux = 1;
+
+        foreach ($Spreadsheet as $Key => $Row) {
+
+            if($count == 0){
+                echo "Create Table ".$Row[0]."(";
+                $tableName = $Row[0];
+            }
+            else if ($count == 1){
+
+                //implode("|", $Row[1]);
+
+                foreach ($Row as $Key => $Row1){
+                    $myArray = explode(',', $Row1);
+                    echo $myArray[0]." ";
+                    if($myArray[1]=="varchar"){
+                        echo "varchar(".$myArray[2].")";
+                       // $nombres+="varchar,";
+                        array_push($nombres, "varchar");
+
+                    }
+                    else if($myArray[1]=="int"){
+                        echo "int";
+                        array_push($nombres, "int");
+
+                    }
+                    else if($myArray[1]=="char"){
+                        echo "char";
+                        array_push($nombres, "char");
+
+                    }
+                    $aux++;
+                    if($aux <= sizeof($Row)){
+                        echo", ";
+                    }
+                    else{
+                        echo");<br> INSERT INTO ".$tableName." <br> VALUES ";
+                    }
+                }
+
+            }
+            else{
+
+                $i = 0;
+                echo "(";
+                foreach ($Row as $Key => $Row1) {
+
+                        if($nombres[$i]=="varchar"){
+                            if(sizeof($nombres)>($i+1))
+                                echo "'$Row1', ";
+                            else
+                                echo "'$Row1'";
+                        }
+
+                        else if($nombres[$i]=="int"){
+                            if(sizeof($nombres)>($i+1))
+                                echo "$Row1, ";
+                            else
+                                echo "$Row1";
+                        }
+                        else if($nombres[$i]=="char"){
+                            if(sizeof($nombres)>($i+1))
+                                echo "'$Row1', ";
+                            else
+                                echo "'$Row1'";
+                        }
+                    $i++;
+                }
+                if(sizeof($Row)>($count))
+                    echo "), ";
+                else
+                    echo ");";
+
+
+            }
+            $count++;
+            //echo implode("|", $Row);
+
+        }
+    }
 
 /**
  * XLS parsing uses php-excel-reader from http://code.google.com/p/php-excel-reader/

@@ -5,7 +5,6 @@
  * Date: 5/2/15
  * Time: 12:28 PM
  */
-// Obtener valores introducidos
 
 include 'SpreadsheetReader.php';
 header('Content-Type: text/plain');
@@ -23,14 +22,7 @@ if (is_file($nombreArchivo)){
 else if ($_FILES['file']['name'] == "")
     $nombreArchivo = '';
 
-
-
-    // Insertar el anuncio en la Base de Datos
-
-
-    // Mover archivo de imagen a su ubicaciÛn definitiva
     move_uploaded_file($_FILES['file']['tmp_name'], $nombreDirectorio . $nombreArchivo);
-    // Mostrar datos introducidos
     $Filepath = $nombreDirectorio . $nombreArchivo;
 
 try
@@ -41,7 +33,7 @@ try
     $Sheets = $Spreadsheet -> Sheets();
 
     $tableName;
-    $nombres = array();
+    $nombres = array(); // An array used to store the data type of the column
     $size = sizeof($Sheets);
 
 
@@ -53,7 +45,7 @@ try
         $count = 0;
         $aux = 1;
 
-        foreach ($Spreadsheet as $Key => $Row) {
+        foreach ($Spreadsheet as $Key => $Row) { // Get the name of the table
 
             if($count == 0){
                 $string.= "CREATE TABLE ".$Row[0]."(";
@@ -61,9 +53,7 @@ try
             }
             else if ($count == 1){
 
-                //implode("|", $Row[1]);
-
-                foreach ($Row as $Key => $Row1){
+                foreach ($Row as $Key => $Row1){ // Get the names of the columns
                     $myArray = explode(',', $Row1);
                     $string.= $myArray[0]." ";
                     if($myArray[1]=="varchar"){
@@ -105,7 +95,7 @@ try
 
                 $i = 0;
                 $string.= "(";
-                foreach ($Row as $Key => $Row1) {
+                foreach ($Row as $Key => $Row1) { // Get the values of the table
 
                         if($nombres[$i]=="varchar"){
                             if(sizeof($nombres)>($i+1))
@@ -148,8 +138,8 @@ try
         }
 
         $string = substr($string, 0, -2).";";
-        echo $string;
-        unlink($Filepath);
+        echo $string; // Print the final string
+        unlink($Filepath); // Delete .xls file
     }
 
 }catch (Exception $E)

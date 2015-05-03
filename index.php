@@ -31,6 +31,7 @@
                 type: 'post',
                 success: function(respuesta){
 
+                    //**HERE IS PRINTED THE SQL SNIPPET**
                     $("div").html( "<h3>" + respuesta + "</h3>");
                 }
             });

@@ -13,6 +13,7 @@ _To know more about read the notes section_
 
 ## Notes
   -The file that is in charge of creating the SQL snippet is named **fileHandler.php**
+ 
   -If you want to avoid deleting the .xls file remove line 152 of *fileHandler.php**
 
 ## Spreadsheet Reader

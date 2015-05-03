@@ -4,11 +4,11 @@
 Tired of writting long lines of SQL code to create tables for a data base? Now, imagine typing all that data from an Excel file.. Yeah wasted time. Well not any more using this PHP module.
 
 ## How To
-	1. To create the SLQ snippet run "index.php"
-	2. Select the file and then click on "Upload"
-	3. Your SQL snippet will be printed..
-	**WARNING YOU .XLS FILE WILL BE DELETED AFTER THE PROCESS**
-	_To know more about read the notes section_
+1. To create the SLQ snippet run "index.php"
+2. Select the file and then click on "Upload"
+3. Your SQL snippet will be printed..
+**WARNING YOU .XLS FILE WILL BE DELETED AFTER THE PROCESS**
+_To know more about read the notes section_
 
 ## Notes
 

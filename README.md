@@ -9,12 +9,13 @@ Tired of writting long lines of SQL code to create tables for a data base? Now, 
 3. Your SQL snippet will be printed!
 
 **WARNING YOU .XLS FILE WILL BE DELETED AFTER THE PROCESS, INSIDE THE PROJECT FOLDER**
+
 _To know more about read the notes section_
 
 ## Notes
   -The file that is in charge of creating the SQL snippet is named **fileHandler.php**
  
-  -If you want to avoid deleting the .xls file remove line 152 of *fileHandler.php**
+  -If you want to avoid deleting the .xls file remove line 152 of **fileHandler.php**
 
 ## Spreadsheet Reader
 For reading the spreadsheet we use the __*"spreadsheet-reader"*__ by __Nuovo__. Our creation is the production of the SQL lines using the reader from Nuovo. [Here is the link to the original repo.](https://github.com/nuovo/spreadsheet-reader)

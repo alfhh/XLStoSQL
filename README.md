@@ -12,6 +12,10 @@ Tired of writting long lines of SQL code to create tables for a data base? Now, 
 
 _To know more about read the notes section_
 
+## .xls Format
+To correctly use this tool is necessary to follow this format:
+[Link to an Excel file](http://1drv.ms/1EMyiLd)
+
 ## Notes
   -The file that is in charge of creating the SQL snippet is named **fileHandler.php**
  
